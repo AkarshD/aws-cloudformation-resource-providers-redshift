@@ -39,6 +39,7 @@ To declare this entity in your AWS CloudFormation template, use the following sy
         "<a href="#vpcsecuritygroupids" title="VpcSecurityGroupIds">VpcSecurityGroupIds</a>" : <i>[ String, ... ]</i>,
         "<a href="#snapshotclusteridentifier" title="SnapshotClusterIdentifier">SnapshotClusterIdentifier</a>" : <i>String</i>,
         "<a href="#snapshotidentifier" title="SnapshotIdentifier">SnapshotIdentifier</a>" : <i>String</i>,
+        "<a href="#id" title="Id">Id</a>" : <i>String</i>,
         "<a href="#owneraccount" title="OwnerAccount">OwnerAccount</a>" : <i>String</i>,
         "<a href="#loggingproperties" title="LoggingProperties">LoggingProperties</a>" : <i><a href="loggingproperties.md">LoggingProperties</a></i>,
         "<a href="#endpoint" title="Endpoint">Endpoint</a>" : <i><a href="endpoint.md">Endpoint</a></i>,
@@ -60,7 +61,8 @@ To declare this entity in your AWS CloudFormation template, use the following sy
         "<a href="#revisiontarget" title="RevisionTarget">RevisionTarget</a>" : <i>String</i>,
         "<a href="#resourceaction" title="ResourceAction">ResourceAction</a>" : <i>String</i>,
         "<a href="#rotateencryptionkey" title="RotateEncryptionKey">RotateEncryptionKey</a>" : <i>Boolean</i>,
-        "<a href="#multiaz" title="MultiAZ">MultiAZ</a>" : <i>Boolean</i>
+        "<a href="#multiaz" title="MultiAZ">MultiAZ</a>" : <i>Boolean</i>,
+        "<a href="#namespaceresourcepolicy" title="NamespaceResourcePolicy">NamespaceResourcePolicy</a>" : <i>Map</i>
     }
 }
 </pre>
@@ -101,6 +103,7 @@ Properties:
       - String</i>
     <a href="#snapshotclusteridentifier" title="SnapshotClusterIdentifier">SnapshotClusterIdentifier</a>: <i>String</i>
     <a href="#snapshotidentifier" title="SnapshotIdentifier">SnapshotIdentifier</a>: <i>String</i>
+    <a href="#id" title="Id">Id</a>: <i>String</i>
     <a href="#owneraccount" title="OwnerAccount">OwnerAccount</a>: <i>String</i>
     <a href="#loggingproperties" title="LoggingProperties">LoggingProperties</a>: <i><a href="loggingproperties.md">LoggingProperties</a></i>
     <a href="#endpoint" title="Endpoint">Endpoint</a>: <i><a href="endpoint.md">Endpoint</a></i>
@@ -123,6 +126,7 @@ Properties:
     <a href="#resourceaction" title="ResourceAction">ResourceAction</a>: <i>String</i>
     <a href="#rotateencryptionkey" title="RotateEncryptionKey">RotateEncryptionKey</a>: <i>Boolean</i>
     <a href="#multiaz" title="MultiAZ">MultiAZ</a>: <i>Boolean</i>
+    <a href="#namespaceresourcepolicy" title="NamespaceResourcePolicy">NamespaceResourcePolicy</a>: <i>Map</i>
 </pre>
 
 ## Properties
@@ -405,6 +409,14 @@ _Type_: String
 
 _Update requires_: [Replacement](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 
+#### Id
+
+_Required_: No
+
+_Type_: String
+
+_Update requires_: [No interruption](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
 #### OwnerAccount
 
 _Required_: No
@@ -634,6 +646,16 @@ _Type_: Boolean
 
 _Update requires_: [No interruption](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 
+#### NamespaceResourcePolicy
+
+The namespace resource policy document that will be attached to a Redshift cluster.
+
+_Required_: No
+
+_Type_: Map
+
+_Update requires_: [No interruption](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
 ## Return Values
 
 ### Ref
@@ -646,10 +668,6 @@ The `Fn::GetAtt` intrinsic function returns a value for a specified attribute of
 
 For more information about using the `Fn::GetAtt` intrinsic function, see [Fn::GetAtt](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-getatt.html).
 
-#### Id
-
-Returns the <code>Id</code> value.
-
 #### DeferMaintenanceIdentifier
 
 A unique identifier for the deferred maintenance window.
@@ -661,3 +679,7 @@ Returns the <code>Port</code> value.
 #### Address
 
 Returns the <code>Address</code> value.
+
+#### ClusterNamespaceArn
+
+The Amazon Resource Name (ARN) of the cluster namespace.
