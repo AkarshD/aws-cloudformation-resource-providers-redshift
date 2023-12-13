@@ -263,28 +263,28 @@ public class UpdateHandler extends BaseHandlerStd {
                     return progress;
                 })
                 .then(progress -> {
-                    progress = proxy.initiate("AWS-Redshift-Cluster::DescribeCluster", proxyClient, model, callbackContext)
+                    progress = proxy.initiate("AWS-Redshift-Cluster::DescribeClustersReadOnly", proxyClient, model, callbackContext)
                             .translateToServiceRequest(Translator::translateToDescribeClusterRequest)
                             .makeServiceCall(this::describeCluster)
                             .done((_request, _response, _client, _model, _context) -> {
-                                _model.setClusterNamespaceArn(Translator.translateFromReadResponse(_response).getClusterNamespaceArn());
-                                return ProgressEvent.progress(Translator.translateFromReadResponse(_response), callbackContext);
+                                _model = Translator.translateFromReadResponse(_response);
+                                model.setDeferMaintenanceIdentifier(_model.getDeferMaintenanceIdentifier());
+                                model.setClusterNamespaceArn(_model.getClusterNamespaceArn());
+                                return ProgressEvent.progress(model, callbackContext);
                             });
                     return  progress;
                 })
                 .then(progress -> {
                     if (model.getClusterNamespaceArn() != null && model.getNamespaceResourcePolicy() != null)  {
                         if (model.getNamespaceResourcePolicy().isEmpty()) {
-                            if (request.getPreviousResourceState().getNamespaceResourcePolicy() != null) {
                                 return proxy.initiate("AWS-Redshift-Cluster::DeleteNamespaceResourcePolicy", proxyClient, model, callbackContext)
                                         .translateToServiceRequest(Translator::translateToDeleteResourcePolicyRequest)
                                         .makeServiceCall(this::deleteNamespaceResourcePolicy)
                                         .progress();
-                            }
                         }
                         else {
                             return proxy.initiate("AWS-Redshift-Cluster::PutNamespaceResourcePolicy", proxyClient, model, callbackContext)
-                                    .translateToServiceRequest(resourceModel -> Translator.translateToPutResourcePolicy(resourceModel, model.getClusterNamespaceArn(), logger))
+                                    .translateToServiceRequest(resourceModel -> Translator.translateToPutResourcePolicy(model, logger))
                                     .makeServiceCall(this::putNamespaceResourcePolicy)
                                     .progress();
                         }
@@ -332,7 +332,7 @@ public class UpdateHandler extends BaseHandlerStd {
                 })
 
                 .then(progress -> {
-                    if (issueModifyClusterMaintenanceRequest(request.getPreviousResourceState(), model)) {
+                    if (issueModifyClusterMaintenanceRequest(model)) {
                         return proxy.initiate("AWS-Redshift-Cluster::ModifyClusterMaintenance", proxyClient, model, callbackContext)
                                 .translateToServiceRequest(Translator:: translateToModifyClusterMaintenanceRequest)
                                 .makeServiceCall(this::modifyClusterMaintenance)
@@ -482,10 +482,9 @@ public class UpdateHandler extends BaseHandlerStd {
                     }
                     return progress;
                 })
-
-
                 .then(progress -> new ReadHandler().handleRequest(proxy, request, callbackContext, proxyClient, logger));
         }
+
     private DescribeClustersResponse describeCluster (
             final DescribeClustersRequest awsRequest,
             final ProxyClient<RedshiftClient> proxyClient) {
@@ -501,7 +500,6 @@ public class UpdateHandler extends BaseHandlerStd {
         } catch (SdkClientException | AwsServiceException e) {
             throw new CfnGeneralServiceException(e);
         }
-        logger.log(awsResponse.toString());
         logger.log(String.format("%s %s has successfully been read.", ResourceModel.TYPE_NAME, awsRequest.clusterIdentifier()));
         return awsResponse;
     }
