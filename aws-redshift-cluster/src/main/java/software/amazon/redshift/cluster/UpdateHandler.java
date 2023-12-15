@@ -130,6 +130,7 @@ public class UpdateHandler extends BaseHandlerStd {
             "EnhancedVpcRouting",
             "HsmClientCertificateIdentifier",
             "HsmConfigurationIdentifier",
+            "IpAddressType",
             "KmsKeyId",
             "MaintenanceTrackName",
             "ManualSnapshotRetentionPeriod",

@@ -187,6 +187,8 @@ public class CreateHandlerTest extends AbstractTestBase {
                 isEqualTo(request.getDesiredResourceState().getClusterNamespaceArn());
         assertThat(response.getResourceModel().getClusterIdentifier()).
                 isEqualTo(request.getDesiredResourceState().getClusterIdentifier());
+        assertThat(response.getResourceModel().getIpAddressType()).
+                isEqualTo(request.getDesiredResourceState().getIpAddressType());
         verify(proxyClient.client()).createCluster(any(CreateClusterRequest.class));
         verify(proxyClient.client(), times(4))
                 .describeClusters(any(DescribeClustersRequest.class));

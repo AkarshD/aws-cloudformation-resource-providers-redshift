@@ -57,6 +57,8 @@ To declare this entity in your AWS CloudFormation template, use the following sy
         "<a href="#defermaintenancestarttime" title="DeferMaintenanceStartTime">DeferMaintenanceStartTime</a>" : <i>String</i>,
         "<a href="#defermaintenanceendtime" title="DeferMaintenanceEndTime">DeferMaintenanceEndTime</a>" : <i>String</i>,
         "<a href="#defermaintenanceduration" title="DeferMaintenanceDuration">DeferMaintenanceDuration</a>" : <i>Integer</i>,
+        "<a href="#ipaddresstype" title="IpAddressType">IpAddressType</a>" : <i>String</i>,
+        "<a href="#redshiftidcapplicationarn" title="RedshiftIdcApplicationArn">RedshiftIdcApplicationArn</a>" : <i>String</i>,
         "<a href="#revisiontarget" title="RevisionTarget">RevisionTarget</a>" : <i>String</i>,
         "<a href="#resourceaction" title="ResourceAction">ResourceAction</a>" : <i>String</i>,
         "<a href="#rotateencryptionkey" title="RotateEncryptionKey">RotateEncryptionKey</a>" : <i>Boolean</i>,
@@ -120,6 +122,8 @@ Properties:
     <a href="#defermaintenancestarttime" title="DeferMaintenanceStartTime">DeferMaintenanceStartTime</a>: <i>String</i>
     <a href="#defermaintenanceendtime" title="DeferMaintenanceEndTime">DeferMaintenanceEndTime</a>: <i>String</i>
     <a href="#defermaintenanceduration" title="DeferMaintenanceDuration">DeferMaintenanceDuration</a>: <i>Integer</i>
+    <a href="#ipaddresstype" title="IpAddressType">IpAddressType</a>: <i>String</i>
+    <a href="#redshiftidcapplicationarn" title="RedshiftIdcApplicationArn">RedshiftIdcApplicationArn</a>: <i>String</i>
     <a href="#revisiontarget" title="RevisionTarget">RevisionTarget</a>: <i>String</i>
     <a href="#resourceaction" title="ResourceAction">ResourceAction</a>: <i>String</i>
     <a href="#rotateencryptionkey" title="RotateEncryptionKey">RotateEncryptionKey</a>: <i>Boolean</i>
@@ -593,6 +597,26 @@ An integer indicating the duration of the maintenance window in days. If you spe
 _Required_: No
 
 _Type_: Integer
+
+_Update requires_: [No interruption](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+#### IpAddressType
+
+The parameter provides an option for customer to configure a redshift cluster that can be connected via both IPv4 and IPv6.
+
+_Required_: No
+
+_Type_: String
+
+_Update requires_: [No interruption](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
+
+#### RedshiftIdcApplicationArn
+
+The Amazon resource name (ARN) of the Amazon Redshift IAM Identity Center application.
+
+_Required_: No
+
+_Type_: String
 
 _Update requires_: [No interruption](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt)
 

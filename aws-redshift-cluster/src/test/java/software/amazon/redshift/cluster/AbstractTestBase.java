@@ -43,6 +43,8 @@ public class AbstractTestBase {
   protected  static final String DEFER_MAINTENANCE_IDENTIFIER;
   protected  static final String DEFER_MAINTENANCE_START_TIME;
   protected  static final String DEFER_MAINTENANCE_END_TIME;
+  protected static final String IP_ADDRESS_TYPE;
+  protected static final String REDSHIFT_IDC_APPLICATION_ARN;
 
   static {
     MOCK_CREDENTIALS = new Credentials("accessKey", "secretKey", "token");
@@ -65,6 +67,8 @@ public class AbstractTestBase {
     DEFER_MAINTENANCE_IDENTIFIER = "cfn-defer-maintenance-identifier";
     DEFER_MAINTENANCE_START_TIME = "2023-12-10T00:00:00Z";
     DEFER_MAINTENANCE_END_TIME = "2024-01-19T00:00:00Z";
+    IP_ADDRESS_TYPE = "dualstack";
+    REDSHIFT_IDC_APPLICATION_ARN = "test-arn";
 
     RESOURCE_POLICY = ResourcePolicy.builder()
             .resourceArn(CLUSTER_NAMESPACE_ARN)
@@ -152,6 +156,7 @@ public class AbstractTestBase {
             .clusterSecurityGroups(Collections.emptyList())
             .iamRoles(Collections.emptyList())
             .vpcSecurityGroups(Collections.emptyList())
+            .ipAddressType(IP_ADDRESS_TYPE)
             .build();
   }
   public static Cluster responseCluster() {
@@ -178,6 +183,8 @@ public class AbstractTestBase {
             .iamRoles(Collections.emptyList())
             .vpcSecurityGroupIds(Collections.emptyList())
             .tags(Collections.emptyList())
+            .ipAddressType(IP_ADDRESS_TYPE)
+            .redshiftIdcApplicationArn(REDSHIFT_IDC_APPLICATION_ARN)
             .build();
   }
 
@@ -199,6 +206,7 @@ public class AbstractTestBase {
             .iamRoles(Collections.emptyList())
             .vpcSecurityGroupIds(Collections.emptyList())
             .tags(Collections.emptyList())
+            .ipAddressType(IP_ADDRESS_TYPE)
             .build();
   }
 

@@ -102,6 +102,8 @@ public class Translator {
             .kmsKeyId(model.getKmsKeyId())
             .hsmClientCertificateIdentifier(model.getHsmClientCertificateIdentifier())
             .hsmConfigurationIdentifier(model.getHsmConfigurationIdentifier())
+            .ipAddressType(model.getIpAddressType())
+            .redshiftIdcApplicationArn(model.getRedshiftIdcApplicationArn())
             .port(model.getPort())
             .preferredMaintenanceWindow(model.getPreferredMaintenanceWindow())
             .publiclyAccessible(model.getPubliclyAccessible())
@@ -471,6 +473,11 @@ public class Translator {
             .findAny()
             .orElse(null);
 
+    final String ipAddressType = streamOfOrEmpty(awsResponse.clusters())
+            .map(software.amazon.awssdk.services.redshift.model.Cluster::ipAddressType)
+            .filter(Objects::nonNull)
+            .findAny()
+            .orElse(null);
 
     final String kmsKeyId = streamOfOrEmpty(awsResponse.clusters())
             .map(Cluster::kmsKeyId)
@@ -619,6 +626,7 @@ public class Translator {
             .elasticIp(elasticIp != null ? elasticIp.elasticIp() : null)
             .hsmClientCertificateIdentifier(hsmStatus != null ? hsmStatus.hsmClientCertificateIdentifier() : null)
             .hsmConfigurationIdentifier(hsmStatus != null ? hsmStatus.hsmConfigurationIdentifier() : null)
+            .ipAddressType(ipAddressType)
             .port(endpoint != null ? endpoint.port() : null)
             .endpoint(endpoint != null ? translateEndpointFromSdk(endpoint) : null)
             .tags(translateTagsFromSdk(tags))
@@ -690,6 +698,7 @@ public class Translator {
             .clusterVersion(model.getClusterVersion() == null || model.getClusterVersion().equals(prevModel.getClusterVersion()) ? null : model.getClusterVersion())
             .hsmClientCertificateIdentifier(model.getHsmClientCertificateIdentifier() == null || model.getHsmClientCertificateIdentifier().equals(prevModel.getHsmClientCertificateIdentifier()) ? null : model.getHsmClientCertificateIdentifier())
             .hsmConfigurationIdentifier(model.getHsmConfigurationIdentifier() == null || model.getHsmConfigurationIdentifier().equals(prevModel.getHsmConfigurationIdentifier()) ? null : model.getHsmConfigurationIdentifier())
+            .ipAddressType(model.getIpAddressType() == null || model.getIpAddressType().equals(prevModel.getIpAddressType()) ? null : model.getIpAddressType())
             .preferredMaintenanceWindow(model.getPreferredMaintenanceWindow() == null || model.getPreferredMaintenanceWindow().equals(prevModel.getPreferredMaintenanceWindow()) ? null : model.getPreferredMaintenanceWindow())
             .publiclyAccessible(model.getPubliclyAccessible() == null || model.getPubliclyAccessible().equals(prevModel.getPubliclyAccessible()) ? null : model.getPubliclyAccessible())
             .clusterSecurityGroups(model.getClusterSecurityGroups() == null || model.getClusterSecurityGroups().equals(prevModel.getClusterSecurityGroups()) ? null : model.getClusterSecurityGroups())
@@ -859,6 +868,7 @@ public class Translator {
             .elasticIp(model.getElasticIp())
             .hsmClientCertificateIdentifier(model.getHsmClientCertificateIdentifier())
             .hsmConfigurationIdentifier(model.getHsmConfigurationIdentifier())
+            .ipAddressType(model.getIpAddressType())
             .ownerAccount(model.getOwnerAccount())
             .port(model.getPort())
             .publiclyAccessible(model.getPubliclyAccessible())
